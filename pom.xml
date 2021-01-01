@@ -1,0 +1,71 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!--  这样子的就是注释  -->
+    <!--  这个groupId通常写成你的根package名称  -->
+    <groupId>main</groupId>
+    <!--  这个artifactId通常就是你的项目名称  -->
+    <artifactId>RAP_EventScheduleSim</artifactId>
+    <!--  这个version就写成这样  -->
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <!--  这里两行是你用的java版本  -->
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!--    依赖填在这里    -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+            <version>3.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-yaml</artifactId>
+            <version>2.10.2</version>
+        </dependency>
+        <dependency>
+            <artifactId>cplex</artifactId>
+            <groupId>ilog</groupId>
+            <version>12.10</version>
+            <scope>system</scope>
+            <systemPath>${env.CPLEX_STUDIO_DIR1210}/cplex/lib/cplex.jar</systemPath>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.2.0</version>
+            <configuration>
+                <descriptors>
+                <descriptor>src/assembly/zip-with-dependencies.xml</descriptor>
+            </descriptors>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>make-assembly</id>
+                    <phase>package</phase>
+                    <goals>
+                        <goal>single</goal>
+                    </goals>
+                </execution>
+            </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
