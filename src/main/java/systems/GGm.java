@@ -16,7 +16,7 @@ public class GGm extends SimulatorWithoutCancellation {
     double at =5;
     StocVariate stream1 = new ExpRV(1,at,"at");
     StocVariate stream2 = new ExpRV(2,pt,"pt");
-    int maxK = 18;
+    int maxK = 20;
 
 
     public GGm(int m) throws IloException{
@@ -130,11 +130,27 @@ public class GGm extends SimulatorWithoutCancellation {
         }
         PrintWriter valFile = new PrintWriter(logStream, true);
 
-        /*for(int i = 0;i<100;i++){
+        for(int i = 0;i<100;i++){
+            String inputDirectory = programPath + File.separator+"OUTPUT"+File.separator+"GGm_"+(i+1)+"_delays.txt";
+            String desDirectory = programPath + File.separator+"OUTPUT"+File.separator+"GGm_"+(i+1)+"_DesResults.txt";
+            String mprDirectory = programPath + File.separator+"OUTPUT"+File.separator+"GGm_"+(i+1)+"_MprResults.txt";
+            OutputStream inputStream = null, desStream=null, mprStream = null;
+            try {
+                inputStream  = new FileOutputStream(inputDirectory);
+                desStream = new FileOutputStream(desDirectory);
+                mprStream = new FileOutputStream(mprDirectory);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                System.exit(-1);
+            }
+            PrintWriter inputFile = new PrintWriter(inputStream, true);
+            PrintWriter desFile = new PrintWriter(desStream, true);
+            PrintWriter mprFile = new PrintWriter(mprStream, true);
+
             System.out.println("=======================  i = "+i+"  =======================================================");
             GGm system = new GGm(2);
             system.resetSeeds(4*i,4*i+1);
-            while(!system.validateMpr()){
+            while(!system.validateMpr(inputFile,desFile,mprFile)){
                 system.MY_INFTY += 100;
             }
             if(system.MY_INFTY>=500){
@@ -142,10 +158,10 @@ public class GGm extends SimulatorWithoutCancellation {
                 return;
             }
         }
-        valFile.println("All instances are validated!");*/
+        valFile.println("All instances are validated!");
 
 
-        GGm system = new GGm(2);
+        /*GGm system = new GGm(2);
 
         int i=0;
         system.resetSeeds(4*i,4*i+1);
@@ -180,7 +196,7 @@ public class GGm extends SimulatorWithoutCancellation {
         if(b)
             system.printMilpResults(milpResult);
         else
-            system.printMilpModel(milpResult);
+            system.printMilpModel(milpResult);*/
     }
 
     public void resetSeeds(long s1,long s2){

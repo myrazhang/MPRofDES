@@ -17,7 +17,7 @@ public abstract class SimulatorWithEventCancellation extends Simulator {
     @Override
     public void simulate(boolean withLog,PrintWriter rvResult){
         // log 文件 ====================================================================================================
-        String programPath = System.getProperty("user.dir");
+        /*String programPath = System.getProperty("user.dir");
         String logDirectory = programPath + File.separator+"OUTPUT"+File.separator+"log.txt";
         OutputStream logStream = null;
         try {
@@ -26,7 +26,7 @@ public abstract class SimulatorWithEventCancellation extends Simulator {
             e.printStackTrace();
             System.exit(-1);
         }
-        PrintWriter result = new PrintWriter(logStream, true);
+        PrintWriter result = new PrintWriter(logStream, true);*/
 
         resetSimulator();
         simulateToGetMprSolution();
@@ -34,17 +34,17 @@ public abstract class SimulatorWithEventCancellation extends Simulator {
         for(String k: systemState.keySet())
             s.append(systemState.get(k).printState());
         if(withLog) log.add(new SimLog(0, s.toString()));
-        scheduleNewEvents(withLog,rvResult);
+        scheduleNewEvents(withLog);
         while(!isTerminate){
             while( // 将某一时刻可以执行的事件全部执行
                     nbTotalExecutionsSimulated<totNbExecutions // 仿真过的事件总数量小于预设的数量
                             && futureExecutionList.size()>0 // Future event list 不空
                             && futureExecutionList.peek().executiontime == clockTime){
-                result.print(futureExecutionList.peek().event.toString() + ": ");
-                result.print(futureExecutionList.peek().executiontime + "\n");
+                //rvResult.print(futureExecutionList.peek().event.toString() + ": ");
+                //rvResult.print(futureExecutionList.peek().executiontime + "\n");
                 executeNextEvent(withLog,rvResult);
                 cancelExecutions();
-                scheduleNewEvents(withLog,rvResult);
+                scheduleNewEvents(withLog);
             }
             if(nbTotalExecutionsSimulated<totNbExecutions
                     && futureExecutionList.size()>0)
@@ -522,7 +522,7 @@ public abstract class SimulatorWithEventCancellation extends Simulator {
 
     @Override
     protected void printMilpResults(PrintWriter result) throws IloException {
-        result.println("Sequence\tEvent\tExecutionTime\tState\tScheduleEvent\tCancelEvent");
+        result.println("Iteration\tOccurringTime\tEventType\tExecutionIndex");
         DecimalFormat df;
         df = new DecimalFormat("#.###");
         df.setRoundingMode(RoundingMode.CEILING);
@@ -543,13 +543,11 @@ public abstract class SimulatorWithEventCancellation extends Simulator {
                     }
                 }
             }
-            result.print(eventName + "\t");
             result.print(df.format(cplex.getValue(Epsilon[k])) + "\t");
+            result.print(eventName + "\t");
 
-            for(int s=0;s<maxS;s++)
-                result.print((int) (cplex.getValue(u[s][k])+0.001)+"\t");
 
-            for(int xi=0;xi<maxXi;xi++) {
+            /*for(int xi=0;xi<maxXi;xi++) {
                 if (events.get(xi).type.equals("zero") && cplex.getValue(z[xi][k])>0.9999)
                     result.print(events.get(xi)+"\t");
                 else if(events.get(xi).type.equals("positive")){
@@ -568,7 +566,7 @@ public abstract class SimulatorWithEventCancellation extends Simulator {
                 if (k>0 && events.get(xi).type.equals("positive") && events.get(xi).conditionsToCancel!=null && cplex.getValue(zbar[xi][k])>0.9999)
                     result.print(events.get(xi)+"\t");
             }
-            result.print("】");
+            result.print("】");*/
 
             result.print("\t"+executionIndex);
 

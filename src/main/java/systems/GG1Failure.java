@@ -20,9 +20,9 @@ public class GG1Failure  extends SimulatorWithEventCancellation{
     StocVariate stream2 = new ExpRV(2,pt,"pt");
     StocVariate stream3 = new ExpRV(3,mttf,"ttf");
     StocVariate stream4 = new ExpRV(4,mttr,"ttr");
-    int nbPart = 4;
+    int nbPart = 5;
     int nbFail = 1;
-    int maxK = 18;
+    int maxK = 20;
 
     public GG1Failure () throws IloException {
         // 状态变量 state variables  ====================================================================================
@@ -180,10 +180,27 @@ public class GG1Failure  extends SimulatorWithEventCancellation{
         PrintWriter valFile = new PrintWriter(logStream, true);
 
         for(int i =0;i<100;i++){
+            String inputDirectory = programPath + File.separator+"OUTPUT"+File.separator+"GG1Fail_"+(i+1)+"_delays.txt";
+            String desDirectory = programPath + File.separator+"OUTPUT"+File.separator+"GG1Fail_"+(i+1)+"_DesResults.txt";
+            String mprDirectory = programPath + File.separator+"OUTPUT"+File.separator+"GG1Fail_"+(i+1)+"_MprResults.txt";
+            OutputStream inputStream = null, desStream=null, mprStream = null;
+            try {
+                inputStream  = new FileOutputStream(inputDirectory);
+                desStream = new FileOutputStream(desDirectory);
+                mprStream = new FileOutputStream(mprDirectory);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                System.exit(-1);
+            }
+            PrintWriter inputFile = new PrintWriter(inputStream, true);
+            PrintWriter desFile = new PrintWriter(desStream, true);
+            PrintWriter mprFile = new PrintWriter(mprStream, true);
+
+
             System.out.println("=======================  i = "+i+" =======================================================");
             GG1Failure system = new GG1Failure();
             system.resetSeeds(4*i,4*i+1,4*i+2,4*i+3);
-            while(!system.validateMpr()){
+            while(!system.validateMpr(inputFile, desFile, mprFile)){
                 system.MY_INFTY += 100;
             }
             if(system.MY_INFTY>=500){

@@ -18,7 +18,7 @@ public class MergeS3M111 extends SimulatorWithoutCancellation {
     double pt2 =10;
     double pt3 = 5;
     int buffer = 1;
-    int maxK = 18;
+    int maxK = 20;
 
     StocVariate stream1 =  new ExpRV(1,pt1,"pt1");
     StocVariate stream2 = new ExpRV(2,pt2,"pt2");
@@ -173,10 +173,27 @@ public class MergeS3M111 extends SimulatorWithoutCancellation {
 
 
         for(int i =0;i<100;i++){
+            String inputDirectory = programPath + File.separator+"OUTPUT"+File.separator+"MergeS3M111_"+(i+1)+"_delays.txt";
+            String desDirectory = programPath + File.separator+"OUTPUT"+File.separator+"MergeS3M111_"+(i+1)+"_DesResults.txt";
+            String mprDirectory = programPath + File.separator+"OUTPUT"+File.separator+"MergeS3M111_"+(i+1)+"_MprResults.txt";
+            OutputStream inputStream = null, desStream=null, mprStream = null;
+            try {
+                inputStream  = new FileOutputStream(inputDirectory);
+                desStream = new FileOutputStream(desDirectory);
+                mprStream = new FileOutputStream(mprDirectory);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+                System.exit(-1);
+            }
+            PrintWriter inputFile = new PrintWriter(inputStream, true);
+            PrintWriter desFile = new PrintWriter(desStream, true);
+            PrintWriter mprFile = new PrintWriter(mprStream, true);
+
+
             System.out.println("===================================== i = "+i+" =======================================");
             MergeS3M111 system = new MergeS3M111();
             system.resetSeeds(4*i,4*i+1,4*i+2);
-            while(!system.validateMpr()){
+            while(!system.validateMpr(inputFile,desFile,mprFile)){
                 system.MY_INFTY += 100;
             }
             if(system.MY_INFTY>=500){

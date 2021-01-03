@@ -72,7 +72,7 @@ public abstract class Simulator {
     public void simulate(boolean withLog, PrintWriter rvResult) {
 
         // log 文件 ====================================================================================================
-        String programPath = System.getProperty("user.dir");
+        /*String programPath = System.getProperty("user.dir");
         String logDirectory = programPath + File.separator + "OUTPUT" + File.separator + "log_mergeS3M211.txt";
         OutputStream logStream = null;
         try {
@@ -81,7 +81,7 @@ public abstract class Simulator {
             e.printStackTrace();
             System.exit(-1);
         }
-        PrintWriter result = new PrintWriter(logStream, true);
+        PrintWriter result = new PrintWriter(logStream, true);*/
 
         simulateToGetMprSolution();
         resetSimulator();
@@ -89,16 +89,14 @@ public abstract class Simulator {
         for (String k : systemState.keySet())
             s.append(systemState.get(k).printState());
         if (withLog) log.add(new SimLog(0, s.toString()));
-        scheduleNewEvents(withLog, rvResult);
+        scheduleNewEvents(withLog);
         while (!isTerminate) {
             while ( // 将某一时刻可以执行的事件全部执行
                     nbTotalExecutionsSimulated < totNbExecutions // 仿真过的事件总数量小于预设的数量
                             && futureExecutionList.size() > 0 // Future event list 不空
                             && futureExecutionList.peek().executiontime == clockTime) {
-                result.print(futureExecutionList.peek().event.toString() + ": ");
-                result.print(futureExecutionList.peek().executiontime + "\n");
                 executeNextEvent(withLog, rvResult);
-                scheduleNewEvents(withLog, rvResult);
+                scheduleNewEvents(withLog);
             }
             if (nbTotalExecutionsSimulated < totNbExecutions
                     && futureExecutionList.size() > 0)
@@ -151,7 +149,7 @@ public abstract class Simulator {
                     // 新execution
                     this.eventScheduleUpTo.put(ep.toString(), this.eventScheduleUpTo.get(ep.toString()) + 1);
                     double t = ep.getOneSampleOfDelay(new PrintWriter(OutputStream.nullOutputStream()));
-                    System.out.println("【" + ep.toString() + "】 " + t);
+                    rvResult.println("【" + ep.toString() + "】 " + t);
                     newEx = new Execution(ep, this.eventScheduleUpTo.get(ep.toString()), clockTime, t);
                     eventNbExistExecutions.put(ep.toString(), eventNbExistExecutions.get(ep.toString()) + 1);
 
@@ -191,7 +189,7 @@ public abstract class Simulator {
 
     }
 
-    void scheduleNewEvents(boolean withLog, PrintWriter rvResult) {
+    void scheduleNewEvents(boolean withLog) {
         ArrayList<Execution> exes = new ArrayList<>();
         for (Event e : events) {
             if (e.type.equals("zero") && eventScheduleUpTo.get(e.toString()) < nbExecutions.get(e.toString()) && // 事件的schedule的数量低于设定的数量
@@ -926,7 +924,7 @@ public abstract class Simulator {
     }
 
     protected void printMilpResults(PrintWriter result) throws IloException {
-        result.println("Sequence\tEvent\tExecutionTime\tState\tScheduleEvent\tEventExecutionSeq");
+        result.println("Iteration\tOccurringTime\tEventType\tExecutionIndex");
         DecimalFormat df;
         df = new DecimalFormat("#.###");
         df.setRoundingMode(RoundingMode.CEILING);
@@ -947,25 +945,8 @@ public abstract class Simulator {
                     }
                 }
             }
-            result.print(eventName + "\t");
             result.print(df.format(cplex.getValue(Epsilon[k])) + "\t");
-
-            for (int s = 0; s < maxS; s++)
-                result.print((int) (cplex.getValue(u[s][k]) + 0.001) + "\t");
-
-            for (int xi = 0; xi < maxXi; xi++) {
-                if (events.get(xi).type.equals("zero") && cplex.getValue(z[xi][k]) > 0.9999)
-                    result.print(events.get(xi) + "\t");
-                else if (events.get(xi).type.equals("positive")) {
-                    int maxI = nbExecutions.get(events.get(xi).toString());
-                    for (int i = 0; i < maxI; i++) {
-                        if (cplex.getValue(x[xi][i][k]) > 0.9999) {
-                            result.print(events.get(xi) + "\t");
-                            break;
-                        }
-                    }
-                }
-            }
+            result.print(eventName + "\t");
             result.print(executionIndex);
 
             result.println();
@@ -1019,6 +1000,46 @@ public abstract class Simulator {
                     }
                 }
             }
+            return true;
+        }
+        return false;
+
+    }
+
+    public boolean validateMpr(PrintWriter input, PrintWriter des, PrintWriter mpr) throws IloException {
+        logWriter = des;
+        resetRandomStream();
+        simulate(true, input);
+        printLog();
+
+        resetRandomStream();
+        MY_INFTY = Math.max(MY_INFTY, 100);
+        buildMilpModel();
+
+        boolean b = solveMilpModel();
+
+        if (b) {
+            for (int xi = 0; xi < maxXi; xi++) {
+                int maxI = nbExecutions.get(events.get(xi).toString());
+                for (int i = 0; i < maxI; i++) {
+                    /*int i1;
+                    if(events.get(xi).nbParallelExecutions ==1){
+                        i1 =i;
+                    }else{
+                        for(i1=0;i1<maxI;i1++){
+                            if(cplex.getValue(y[xi][i1][i])>0.9999)
+                                break;
+                        }
+                    }*/
+
+                    if (executionLog.containsKey(events.get(xi).toString() + (i + 1)) &&
+                            (cplex.getValue(e[xi][0][i]) - executionLog.get(events.get(xi).toString() + (i + 1)) > 0.0001 ||
+                                    cplex.getValue(e[xi][0][i]) - executionLog.get(events.get(xi).toString() + (i + 1)) < -0.0001)) {
+                        return false;
+                    }
+                }
+            }
+            printMilpResults(mpr);
             return true;
         }
         return false;
