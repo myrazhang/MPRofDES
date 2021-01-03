@@ -1,0 +1,22 @@
+Sequence	Event	ExecutionTime	State	ScheduledExecutions	EventScheduleSeq	EventExecutionSeq	ScheduleTime	Delay
+0			{ua: 0}{ufail: 0}{q: 0}{h: 0}{urepair: 0}{g: 0}	Event{Count arrival}Event{Count fail}				
+1	Event{Count arrival}	0	{ua: 1}{ufail: 0}{q: 0}{h: 0}{urepair: 0}{g: 0}	Event{Arrival}	1	1	0	0
+2	Event{Count fail}	0	{ua: 1}{ufail: 1}{q: 0}{h: 0}{urepair: 0}{g: 0}	Event{Fail}	1	1	0	0
+3	Event{Arrival}	4.634	{ua: 0}{ufail: 1}{q: 1}{h: 0}{urepair: 0}{g: 0}	Event{Count arrival}Event{Start}	1	1	0	4.634
+4	Event{Count arrival}	4.634	{ua: 1}{ufail: 1}{q: 1}{h: 0}{urepair: 0}{g: 0}	Event{Arrival}	2	2	4.634	0
+5	Event{Start}	4.634	{ua: 1}{ufail: 1}{q: 0}{h: 0}{urepair: 0}{g: 1}	Event{Finish}	1	1	4.634	0
+6	Event{Arrival}	5.154	{ua: 0}{ufail: 1}{q: 1}{h: 0}{urepair: 0}{g: 1}	Event{Count arrival}	2	2	4.634	0.521
+7	Event{Count arrival}	5.154	{ua: 1}{ufail: 1}{q: 1}{h: 0}{urepair: 0}{g: 1}	Event{Arrival}	3	3	5.154	0
+8	Event{Arrival}	7.872	{ua: 0}{ufail: 1}{q: 2}{h: 0}{urepair: 0}{g: 1}	Event{Count arrival}	3	3	5.154	2.718
+9	Event{Count arrival}	7.872	{ua: 1}{ufail: 1}{q: 2}{h: 0}{urepair: 0}{g: 1}	Event{Arrival}	4	4	7.872	0
+10	Event{Finish}	8.34	{ua: 1}{ufail: 1}{q: 2}{h: 0}{urepair: 0}{g: 0}	Event{Start}	1	1	4.634	3.706
+11	Event{Start}	8.34	{ua: 1}{ufail: 1}{q: 1}{h: 0}{urepair: 0}{g: 1}	Event{Finish}	2	2	8.34	0
+12	Event{Arrival}	10.26	{ua: 0}{ufail: 1}{q: 2}{h: 0}{urepair: 0}{g: 1}	Event{Count arrival}	4	4	7.872	2.389
+13	Event{Count arrival}	10.26	{ua: 1}{ufail: 1}{q: 2}{h: 0}{urepair: 0}{g: 1}	Event{Arrival}	5	5	10.26	0
+14	Event{Fail}	18.55	{ua: 1}{ufail: 0}{q: 2}{h: 1}{urepair: 0}{g: 1}	Event{Count repair}	1	1	0	18.55
+15	Event{Count repair}	18.55	{ua: 1}{ufail: 0}{q: 2}{h: 1}{urepair: 1}{g: 0}	Event{Repair}	1	1	18.55	0
+16	Event{Arrival}	20.595	{ua: 0}{ufail: 0}{q: 3}{h: 1}{urepair: 1}{g: 0}		5	5	10.26	10.335
+17	Event{Repair}	22.258	{ua: 0}{ufail: 0}{q: 3}{h: 0}{urepair: 0}{g: 0}	Event{Start}	1	1	18.55	3.709
+18	Event{Start}	22.258	{ua: 0}{ufail: 0}{q: 2}{h: 0}{urepair: 0}{g: 1}	Event{Finish}	3	3	22.258	0
+19	Event{Finish}	30.933	{ua: 0}{ufail: 0}{q: 2}{h: 0}{urepair: 0}{g: 1}		2	2	8.34	22.594
+20	Event{Finish}	65.507	{ua: 0}{ufail: 0}{q: 2}{h: 0}{urepair: 0}{g: 0}	Event{Start}	3	3	22.258	43.25

@@ -1,0 +1,22 @@
+Sequence	Event	ExecutionTime	State	ScheduledExecutions	EventScheduleSeq	EventExecutionSeq	ScheduleTime	Delay
+0			{g3: 0}{q: 0}{b1: 0}{g1: 0}{g2: 0}{b2: 0}	Event{Start  m1}Event{Start  m2}				
+1	Event{Start  m1}	0	{g3: 0}{q: 0}{b1: 0}{g1: 1}{g2: 0}{b2: 0}	Event{Finish m1}	1	1	0	0
+2	Event{Start  m2}	0	{g3: 0}{q: 0}{b1: 0}{g1: 1}{g2: 1}{b2: 0}	Event{Finish m2}	1	1	0	0
+3	Event{Finish m1}	3.851	{g3: 0}{q: 0}{b1: 1}{g1: 0}{g2: 1}{b2: 0}	Event{Depart m1}	1	1	0	3.851
+4	Event{Depart m1}	3.851	{g3: 0}{q: 1}{b1: 0}{g1: 0}{g2: 1}{b2: 0}	Event{Start  m1}Event{Start  m3}	1	1	3.851	0
+5	Event{Start  m1}	3.851	{g3: 0}{q: 1}{b1: 0}{g1: 1}{g2: 1}{b2: 0}	Event{Finish m1}	2	2	3.851	0
+6	Event{Start  m3}	3.851	{g3: 1}{q: 0}{b1: 0}{g1: 1}{g2: 1}{b2: 0}	Event{depart m3}	1	1	3.851	0
+7	Event{Finish m1}	4.102	{g3: 1}{q: 0}{b1: 1}{g1: 0}{g2: 1}{b2: 0}	Event{Depart m1}	2	2	3.851	0.252
+8	Event{Depart m1}	4.102	{g3: 1}{q: 1}{b1: 0}{g1: 0}{g2: 1}{b2: 0}		2	2	4.102	0
+9	Event{Finish m2}	4.812	{g3: 1}{q: 1}{b1: 0}{g1: 0}{g2: 0}{b2: 1}		1	1	0	4.812
+10	Event{depart m3}	6.259	{g3: 0}{q: 1}{b1: 0}{g1: 0}{g2: 0}{b2: 1}	Event{Start  m3}	1	1	3.851	2.409
+11	Event{Start  m3}	6.259	{g3: 1}{q: 0}{b1: 0}{g1: 0}{g2: 0}{b2: 1}	Event{depart m3}Event{Depart m2}	2	2	6.259	0
+12	Event{Depart m2}	6.259	{g3: 1}{q: 1}{b1: 0}{g1: 0}{g2: 0}{b2: 0}	Event{Start  m2}	1	1	6.259	0
+13	Event{Start  m2}	6.259	{g3: 1}{q: 1}{b1: 0}{g1: 0}{g2: 1}{b2: 0}	Event{Finish m2}	2	2	6.259	0
+14	Event{depart m3}	7.166	{g3: 0}{q: 1}{b1: 0}{g1: 0}{g2: 1}{b2: 0}	Event{Start  m3}	2	2	6.259	0.907
+15	Event{Start  m3}	7.166	{g3: 1}{q: 0}{b1: 0}{g1: 0}{g2: 1}{b2: 0}	Event{depart m3}	3	3	7.166	0
+16	Event{depart m3}	8.897	{g3: 0}{q: 0}{b1: 0}{g1: 0}{g2: 1}{b2: 0}		3	3	7.166	1.732
+17	Event{Finish m2}	32.939	{g3: 0}{q: 0}{b1: 0}{g1: 0}{g2: 0}{b2: 1}	Event{Depart m2}	2	2	6.259	26.681
+18	Event{Depart m2}	32.939	{g3: 0}{q: 1}{b1: 0}{g1: 0}{g2: 0}{b2: 0}	Event{Start  m3}	2	2	32.939	0
+19	Event{Start  m3}	32.939	{g3: 1}{q: 0}{b1: 0}{g1: 0}{g2: 0}{b2: 0}	Event{depart m3}	4	4	32.939	0
+20	Event{depart m3}	37.692	{g3: 0}{q: 0}{b1: 0}{g1: 0}{g2: 0}{b2: 0}		4	4	32.939	4.753

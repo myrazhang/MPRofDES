@@ -1,0 +1,22 @@
+Iteration	OccurringTime	EventType	ExecutionIndex
+0	0		0
+1	0	Event{Count arrival}	0
+2	2.235	Event{Arrival}	0
+3	2.235	Event{Start}	0
+4	2.235	Event{Count arrival}	1
+5	5.809	Event{Finish}	0
+6	6.609	Event{Arrival}	1
+7	6.609	Event{Start}	1
+8	6.609	Event{Count arrival}	2
+9	8.561	Event{Arrival}	2
+10	8.561	Event{Start}	2
+11	8.561	Event{Count arrival}	3
+12	9.038	Event{Finish}	1
+13	9.278	Event{Arrival}	3
+14	9.278	Event{Count arrival}	4
+15	9.278	Event{Start}	3
+16	9.752	Event{Finish}	3
+17	10.2	Event{Arrival}	4
+18	10.2	Event{Start}	4
+19	11.144	Event{Finish}	4
+20	25.442	Event{Finish}	2

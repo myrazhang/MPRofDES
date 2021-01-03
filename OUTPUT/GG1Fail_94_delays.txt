@@ -1,0 +1,11 @@
+【Event{Arrival}】 4.927515553802124
+【Event{Fail}】 19.7243941066684
+【Event{Arrival}】 23.41845701720986
+【Event{Finish}】 3.94057913468642
+【Event{Repair}】 3.9434455129784
+【Event{Arrival}】 0.9252188304848663
+【Event{Finish}】 11.736691746473749
+【Event{Arrival}】 4.121641833198934
+【Event{Arrival}】 18.34697518077008
+【Event{Finish}】 6.1060096395762455
+【Event{Finish}】 6.926274834302905

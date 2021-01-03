@@ -1,0 +1,22 @@
+Iteration	OccurringTime	EventType	ExecutionIndex
+0	0		0
+1	0	Event{Start  m2}	0
+2	0	Event{Start  m1}	0
+3	4.246	Event{Finish m1}	0
+4	4.246	Event{Depart m1}	0
+5	4.246	Event{Start  m3}	0
+6	4.246	Event{Start  m1}	1
+7	5.306	Event{Finish m2}	0
+8	5.306	Event{Depart m2}	0
+9	5.306	Event{Start  m2}	1
+10	6.902	Event{depart m3}	0
+11	6.902	Event{Start  m3}	1
+12	9.866	Event{depart m3}	1
+13	14.439	Event{Finish m2}	1
+14	14.439	Event{Depart m2}	1
+15	14.439	Event{Start  m3}	2
+16	14.465	Event{depart m3}	2
+17	16.008	Event{Finish m1}	1
+18	16.008	Event{Depart m1}	1
+19	16.008	Event{Start  m3}	3
+20	16.911	Event{depart m3}	3

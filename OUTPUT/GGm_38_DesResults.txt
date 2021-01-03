@@ -1,0 +1,22 @@
+Sequence	Event	ExecutionTime	State	ScheduledExecutions	EventScheduleSeq	EventExecutionSeq	ScheduleTime	Delay
+0			{ua: 0}{q: 0}{g: 0}	Event{Count arrival}				
+1	Event{Count arrival}	0	{ua: 1}{q: 0}{g: 0}	Event{Arrival}	1	1	0	0
+2	Event{Arrival}	2.436	{ua: 0}{q: 1}{g: 0}	Event{Count arrival}Event{Start}	1	1	0	2.436
+3	Event{Count arrival}	2.436	{ua: 1}{q: 1}{g: 0}	Event{Arrival}	2	2	2.436	0
+4	Event{Start}	2.436	{ua: 1}{q: 0}{g: 1}	Event{Finish}	1	1	2.436	0
+5	Event{Arrival}	2.479	{ua: 0}{q: 1}{g: 1}	Event{Count arrival}Event{Start}	2	2	2.436	0.044
+6	Event{Count arrival}	2.479	{ua: 1}{q: 1}{g: 1}	Event{Arrival}	3	3	2.479	0
+7	Event{Start}	2.479	{ua: 1}{q: 0}{g: 2}	Event{Finish}	2	2	2.479	0
+8	Event{Finish}	5.261	{ua: 1}{q: 0}{g: 1}		2	1	2.479	2.782
+9	Event{Arrival}	5.437	{ua: 0}{q: 1}{g: 1}	Event{Count arrival}Event{Start}	3	3	2.479	2.958
+10	Event{Count arrival}	5.437	{ua: 1}{q: 1}{g: 1}	Event{Arrival}	4	4	5.437	0
+11	Event{Start}	5.437	{ua: 1}{q: 0}{g: 2}	Event{Finish}	3	3	5.437	0
+12	Event{Finish}	6.33	{ua: 1}{q: 0}{g: 1}		1	2	2.436	3.895
+13	Event{Finish}	14.696	{ua: 1}{q: 0}{g: 0}		3	3	5.437	9.26
+14	Event{Arrival}	23.207	{ua: 0}{q: 1}{g: 0}	Event{Count arrival}Event{Start}	4	4	5.437	17.771
+15	Event{Count arrival}	23.207	{ua: 1}{q: 1}{g: 0}	Event{Arrival}	5	5	23.207	0
+16	Event{Start}	23.207	{ua: 1}{q: 0}{g: 1}	Event{Finish}	4	4	23.207	0
+17	Event{Arrival}	23.453	{ua: 0}{q: 1}{g: 1}	Event{Start}	5	5	23.207	0.247
+18	Event{Start}	23.453	{ua: 0}{q: 0}{g: 2}	Event{Finish}	5	5	23.453	0
+19	Event{Finish}	28.223	{ua: 0}{q: 0}{g: 1}		4	4	23.207	5.017
+20	Event{Finish}	35.393	{ua: 0}{q: 0}{g: 0}		5	5	23.453	11.94

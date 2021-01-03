@@ -1,0 +1,8 @@
+【Event{Finish m1}】 4.228672683586137
+【Event{Finish m2}】 5.284048921015348
+【Event{Finish m1}】 13.971699301916294
+【Event{depart m3}】 2.644711913673823
+【Event{Finish m2}】 10.514087896526316
+【Event{depart m3}】 3.309322148110243
+【Event{depart m3}】 5.389371904723341
+【Event{depart m3}】 0.07051258498085197

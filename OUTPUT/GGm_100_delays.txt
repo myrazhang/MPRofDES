@@ -1,0 +1,10 @@
+【Event{Arrival}】 2.6429204272413354
+【Event{Arrival}】 8.732312063697684
+【Event{Finish}】 4.227239136812278
+【Event{Arrival}】 3.517271481400785
+【Event{Finish}】 8.411270317221053
+【Event{Arrival}】 9.02654663762213
+【Event{Finish}】 23.56369945533831
+【Event{Arrival}】 2.1596703643768214
+【Event{Finish}】 3.0043009203924758
+【Event{Finish}】 4.094280206166056
